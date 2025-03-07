@@ -17,26 +17,27 @@
     </div>
 
     <div class="input-container">
-      <input v-model="newMessage" @keyup.enter="sendMessage" placeholder="your message..." />
+      <input v-model="newMessage"
+      @keyup.enter="sendMessage"
+      placeholder="your message..."
+      />
       <button @click="sendMessage"></button>
       <button @click="toggleEmojiPanel" class="emoji-button"></button>
-      
+
       <div v-if="showEmojiPanel" class="emoji-panel">
-       <div class="emoji">
+
         <span @click="addEmoji('😊')">😊</span>
         <span @click="addEmoji('😂')">😂</span>
         <span @click="addEmoji('😍')">😍</span>
         <span @click="addEmoji('😎')">😎</span>
         <span @click="addEmoji('😢')">😢</span>
         <span @click="addEmoji('👍')">👍</span>
-       </div> 
-        
-      </div>
-    </div>
-   
+       </div>
+
+
     </div>
 
-    
+   </div>
 </template>
 
 <script>
@@ -76,7 +77,7 @@ export default {
     },
     addEmoji(emoji) {
       this.newMessage += emoji;
-      this.showEmojiPanel = false; // Закрыть панель после выбора эмодзи
+      this.showEmojiPanel = false;
     }
   }
 };
@@ -133,8 +134,10 @@ export default {
 
 .messages .other-message {
   align-self: flex-start;
-  background: #ededed;
-  color: rgb(53, 94, 0);
+  margin-top: 10px;
+  background: #124b13;
+  color: rgb(255, 255, 255);
+  text-align: left;
 }
 
 .messages::-webkit-scrollbar {
@@ -179,7 +182,7 @@ input::placeholder {
   display: flex;
   margin-top: 10px;
   font-size: 12px;
-  color: #eaff00;
+  color: #ffffff85;
   justify-content: flex-end;
   right: 10px;
   background: transparent;
@@ -207,7 +210,7 @@ button {
   cursor: pointer;
 }
 
-/* Для кнопки смайлика */
+
 .emoji-button {
   background-image: url("../assets/smile.png");
   height: 25px;
@@ -215,26 +218,30 @@ button {
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
-  position: relative; /* Это нужно для точного позиционирования */
+  position: relative;
 }
 
-/* Панель смайликов */
+.emoji {
+   background: transparent;
+}
+
 .emoji-panel {
-  position: absolute; /* Позиционирование относительно родительского контейнера */
-  bottom: 40px; /* Расстояние между панелью и кнопкой смайликов */
-  right: 0; /* Позиционируем по правому краю */
-  background-color: #ffffff08; /* Полупрозрачный фон */
+  position: absolute;
+  bottom: 80px;
+  right: 430px;
+  background-color: #ffffff17;
   padding: 10px;
   border-radius: 5px;
   display: flex;
-  flex-direction: column; /* Размещаем смайлики вертикально */
-  align-items: flex-start; /* Выравниваем смайлики по левому краю */
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
-  z-index: 999; /* Панель будет поверх других элементов */
+  z-index: 999;
 }
 
 .emoji-panel span {
   font-size: 20px;
   cursor: pointer;
+  background: transparent;
 }
 </style>
