@@ -17,10 +17,12 @@
     </div>
 
     <div class="input-container">
-      <input v-model="newMessage"
+      <input ref="messageInput"
+      v-model="newMessage"
       @keyup.enter="sendMessage"
       placeholder="your message..."
       />
+
       <button @click="sendMessage"></button>
       <button @click="toggleEmojiPanel" class="emoji-button"></button>
 
@@ -76,9 +78,12 @@ export default {
       this.showEmojiPanel = !this.showEmojiPanel;
     },
     addEmoji(emoji) {
-      this.newMessage += emoji;
-      this.showEmojiPanel = false;
-    }
+    this.newMessage += emoji;
+    this.$nextTick(() => {
+      const input = this.$refs.messageInput;
+      if (input) input.focus();
+    });
+  }
   }
 };
 </script>
@@ -94,7 +99,8 @@ export default {
   width: 20px;
 }
 .chat {
-  max-width: 600px;
+  max-width: 700px;
+  height: 100vh;
   margin: auto;
   padding: 20px;
   border-radius: 5px;
@@ -153,8 +159,14 @@ export default {
   background: transparent !important;
 }
 
+.input-container {
+   display: flex;
+   align-items: center;
+}
+
 input {
   flex: 1;
+  width: 100vh;
   padding: 10px;
   font-size: 15px;
   border: 1px solid #ffffff;
@@ -196,11 +208,9 @@ input {
 }
 
 button {
-  margin-top: 20px;
-  padding: 5px;
   height: 25px;
   width: 25px;
-  margin-left: 20px;
+  margin-left: 15px;
   background: transparent;
   background-image: url("../assets/send.png");
   background-size: contain;
@@ -218,23 +228,19 @@ button {
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
+  background-position: center;
   position: relative;
-}
-
-.emoji {
-   background: transparent;
 }
 
 .emoji-panel {
   position: absolute;
-  bottom: 80px;
-  right: 430px;
+  margin-top: -300px;
   background-color: #ffffff17;
   padding: 10px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 10px;
   z-index: 999;
 }
@@ -246,4 +252,3 @@ button {
 }
 </style>
 
-vvf
